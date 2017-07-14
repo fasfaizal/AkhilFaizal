@@ -8,12 +8,29 @@ namespace InventoryManagement
 {
     public class DBConnectExecute
     {
-        public SqlConnection Connect()
+        private SqlConnection myConn;
+        private SqlConnection connect()
+        {            
+            string MyConnection2 = "Data Source=KL-DEV6;Initial Catalog=Inventory;User ID=sa;Password=!QAZ2wsx";
+            myConn = new SqlConnection(MyConnection2);
+            return myConn;
+        }
+
+        public bool validate(string name)
         {
-            SqlConnection Myconn;
-            string MyConnection2 = "Data Source=KL-DEV6;Initial Catalog=Inventory;User ID=sa";
-            Myconn = new SqlConnection(MyConnection2);
-            return Myconn;
+            bool valid = true;
+
+            return valid;
+        }
+
+        public void InsertNewItem(string id,string name, string batch, string quantity)
+        {
+            connect();
+            myConn.Open();
+            string Query = string.Format("INSERT INTO ITEMS VALUES({0},'{1}');INSERT INTO STOCK VALUES({0},'{2}',0,0,{3},NULL,{4})",id, name, batch, quantity,200+Convert.ToInt32(id));
+            SqlCommand myCommand = new SqlCommand(Query, myConn);
+            myCommand.ExecuteNonQuery();
+            myConn.Close();
         }
     }
 }
