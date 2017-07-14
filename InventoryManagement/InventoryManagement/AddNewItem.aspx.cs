@@ -18,8 +18,6 @@ namespace InventoryManagement
         public bool validate(string name)
         {
             bool valid = true;
-            if (!dbConnectExecute.validate(name))
-                valid = false;
             return valid;
         }
 
@@ -29,6 +27,7 @@ namespace InventoryManagement
             if (validate(Name.Text))
             {                
                 dbConnectExecute.InsertNewItem(ItemID.Text,Name.Text,Batch.Text,Quantity.Text);
+                Response.Redirect("Default.aspx");
             }
         }
     }
