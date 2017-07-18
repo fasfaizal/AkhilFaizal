@@ -12,8 +12,9 @@ namespace InventoryManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DBConnectExecute con = new DBConnectExecute();
-            SqlDataReader dr=con.FetchItems();
+            var dr = ItemBatch.ReadAll();
+            //DBConnectExecute con = new DBConnectExecute();
+            //SqlDataReader dr = con.FetchItems();
             GridView1.DataSource = dr;
             GridView1.DataBind();
         }
@@ -28,7 +29,7 @@ namespace InventoryManagement
         protected void Add_Btn_Click(object sender, EventArgs e)
         {
             Response.Redirect("AddNewItem.aspx");
-            
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
