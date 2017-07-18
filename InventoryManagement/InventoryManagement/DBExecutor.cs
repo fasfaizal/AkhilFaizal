@@ -9,13 +9,15 @@ namespace InventoryManagement
 {
     public class DBExecutor<T>
     {
-        public delegate T Exec(SqlConnection myConn);
+        public delegate T Exec(SqlCommand myConn);
         public T Execute(Exec exeObj)
         {
             string MyConnection2 = WebConfigurationManager.AppSettings["ConnectionString"];
             SqlConnection myConn=myConn = new SqlConnection(MyConnection2);
             myConn.Open();
-            T ret=exeObj.Invoke(myConn);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = myConn;
+            T ret=exeObj.Invoke(cmd);
             myConn.Close();
             return ret;
         }
