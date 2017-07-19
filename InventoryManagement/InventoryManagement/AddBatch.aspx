@@ -25,13 +25,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>BatchID
-                    </td>
-                    <td>
-                        <asp:TextBox ID="BatchID" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
                     <td>Batch
                     </td>
                     <td>

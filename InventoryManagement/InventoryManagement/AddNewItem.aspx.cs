@@ -23,10 +23,13 @@ namespace InventoryManagement
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-            dbConnectExecute = new DBConnectExecute();
             if (validate(Name.Text))
-            {                
-                dbConnectExecute.InsertNewItem(ItemID.Text,Name.Text,Batch.Text,Quantity.Text);
+            {
+                int itemID;
+                Item item = new Item();
+                itemID= item.Save(Name.Text);
+                ItemBatch itemBatch = new ItemBatch();
+                itemBatch.Save(itemID, Batch.Text, Quantity.Text);
                 Response.Redirect("Default.aspx");
             }
         }

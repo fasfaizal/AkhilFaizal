@@ -11,14 +11,14 @@ namespace InventoryManagement
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            ItemID.Text = Convert.ToString(Session["ItemId"]);
-            Name.Text = Convert.ToString(Session["ItemName"]);
+            ItemID.Text = Request.QueryString["ItemId"];
+            Name.Text =Request.QueryString["ItemName"];
         }
 
         protected void Submit_Click(object sender, EventArgs e)
         {
-            DBConnectExecute dbConnectExecute = new DBConnectExecute();
-            dbConnectExecute.InsertNewBatch(ItemID.Text, Name.Text,BatchID.Text, Batch.Text, Quantity.Text);
+            ItemBatch itemBatch = new ItemBatch();
+            itemBatch.Save(Request.QueryString["itemId"], Batch.Text, Quantity.Text);
             Response.Redirect("Default.aspx");
         }
     }

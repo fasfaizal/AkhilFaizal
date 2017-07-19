@@ -11,13 +11,6 @@
         <div>
             <table>
                 <tr>
-                    <td>ID
-                    </td>
-                    <td>
-                        <asp:TextBox ID="ItemID" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
                     <td>Name
                     </td>
                     <td>

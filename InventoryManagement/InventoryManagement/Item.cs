@@ -11,17 +11,25 @@ namespace InventoryManagement
         public int id{ get; set; }
         public string Name{ get; set; }
 
-        public void Save(string name)
+        public int Save(string name)
         {
+            int newId=0;
             DBExecutor<int> dbExecutor = new DBExecutor<int>();
             dbExecutor.Execute(delegate (SqlCommand myCommand)
             {
-                int updatedRows;
+                SqlDataReader tableData;
                 myCommand.CommandText =string.Format("INSERT INTO Items VALUES('{0}')",name);
-                updatedRows = myCommand.ExecuteNonQuery();
-                return updatedRows;
+                newId = myCommand.ExecuteNonQuery();
+                myCommand.CommandText = string.Format("SELECT ID FROM Items WHERE Name='{0}'", name);
+                tableData =myCommand.ExecuteReader();
+                while (tableData.Read())
+                {
+                    newId = Convert.ToInt32(tableData["ID"]);
+                }
+                return newId;
             }
             );
+            return newId;
         }
         public static void Delete(int id)
         {
@@ -53,6 +61,7 @@ namespace InventoryManagement
             );
             return itemName;
         }
+
         public static List<Item> ReadAll()
         {
             List<Item> items = new List<Item>();
