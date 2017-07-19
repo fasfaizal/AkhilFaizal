@@ -9,7 +9,6 @@ namespace InventoryManagement
 {
     public partial class AddNewItem : System.Web.UI.Page
     {
-        private DBConnectExecute dbConnectExecute;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -29,7 +28,7 @@ namespace InventoryManagement
                 Item item = new Item();
                 itemID= item.Save(Name.Text);
                 ItemBatch itemBatch = new ItemBatch();
-                itemBatch.Save(itemID, Batch.Text, Quantity.Text);
+                itemBatch.Save(itemID, Batch.Text,Convert.ToInt32(Quantity.Text));
                 Response.Redirect("Default.aspx");
             }
         }

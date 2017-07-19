@@ -18,7 +18,7 @@ namespace InventoryManagement
         protected void Submit_Click(object sender, EventArgs e)
         {
             ItemBatch itemBatch = new ItemBatch();
-            itemBatch.Save(Request.QueryString["itemId"], Batch.Text, Quantity.Text);
+            itemBatch.Save(Convert.ToInt32( Request.QueryString["itemId"]),Batch.Text,Convert.ToInt32(Quantity.Text));
             Response.Redirect("Default.aspx");
         }
     }
